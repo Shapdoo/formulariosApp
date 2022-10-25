@@ -1,0 +1,64 @@
+<h2>Template: Basicos</h2>
+<hr>
+
+<div class="row">
+  <div class="col">
+
+    <form (ngSubmit)="guardar()" #miFormulario="ngForm" autocomplete="off">
+      <!-- Campo de producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input type="text" name="producto" [(ngModel)]="initForm.producto" class="form-control" placeholder="nombre del producto" required
+            minlength="3">
+          <span *ngIf="nombreInvalido()" class="form-text text-danger">Debe de contener 3 caracteres</span>
+        </div>
+      </div>
+
+      <!-- Precio del producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input type="number" name="precio" [(ngModel)]="initForm.precio" class="form-control" placeholder="precio del producto" required>
+          <span *ngIf="precioInvalido()" class="form-text text-danger">El precio debe ser 0 o mayor</span>
+        </div>
+      </div>
+
+      <!-- Existencias del producto  -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input type="number" customMin [minimo]="0" name="existencias" [(ngModel)]="initForm.existencias" class="form-control"
+            placeholder="existencias del producto" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end" [disabled]="miFormulario.invalid">Guardar</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span>
+    <pre>{{ miFormulario.valid }}</pre>
+
+    <span>Value</span>
+    <pre>{{ miFormulario.value | json }}</pre>
+
+    <span>Pristine</span>
+    <pre>{{ miFormulario.pristine }}</pre>
+
+    <span>Touched</span>
+    <pre>{{ miFormulario.touched }}</pre>
+
+    <span>CustonDirective</span>
+    <pre>{{ customDirective() | json }}</pre>
+  </div>
+</div>
